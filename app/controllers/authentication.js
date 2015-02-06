@@ -9,10 +9,6 @@ var clientSecret = process.env.HARVEST_CLIENT_SECRET;
 var e = encodeURIComponent;
 
 authentication.requireAuth = function (req, res, next) {
-  if (req.url.indexOf("/signin") == 0) {
-    return next();
-  }
-
   var createHarvestServiceAndContinue = function () {
     (req.services = req.services || {}).harvest =
       new Harvest(req.session.token, req.session.user);

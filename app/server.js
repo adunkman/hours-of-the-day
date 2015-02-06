@@ -23,10 +23,11 @@ app.use(require("cookie-session")({
   keys: (process.env.COOKIE_KEYS || "insecure").split(",")
 }));
 
-app.use(controllers.authentication.requireAuth);
-
+app.get("/ping", controllers.ping.reply);
 app.get("/signin", controllers.authentication.signinForm);
 app.get("/signin/callback", controllers.authentication.callback);
+
+app.use(controllers.authentication.requireAuth);
 
 app.get("/", controllers.team.workHoursReport);
 
