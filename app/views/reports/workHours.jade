@@ -1,8 +1,20 @@
 extends ../shared/layout
 
 block body
-  h1 Team Work Schedule
-
-  svg.time-chart.js-time-chart
-
-  script.js-time-chart-data(type="application/json")!= JSON.stringify(team)
+  table.time-chart
+    thead
+      tr
+        th.name
+        th.chart: each label in labels
+          div.gridline(style="left:" + label.offset + "%")
+            span= label.text
+    tbody: each teamMember in team
+      tr
+        td.name= teamMember.user.first_name + " " + teamMember.user.last_name
+        td.chart
+          each entry in teamMember.entries
+            div.entry(style="left:" + entry.started_at_day_offset + "%;width:" + (entry.ended_at_day_offset - entry.started_at_day_offset) + "%")
+              span.start= entry.started_at
+              span.end= entry.ended_at
+          each label in labels
+            div.gridline(style="left:" + label.offset + "%")

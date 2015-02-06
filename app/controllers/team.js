@@ -44,12 +44,31 @@ team.workHoursReport = function (req, res, next) {
             endedAt.add(1, "day");
           }
 
-          entry.started_at_day_offset = startedAt.diff(today);
-          entry.ended_at_day_offset = endedAt.diff(today);
+          entry.started_at_day_offset = percentOfDay(startedAt.diff(today));
+          entry.ended_at_day_offset = percentOfDay(Math.min(86400000, endedAt.diff(today)));
         });
       });
 
-      res.render("reports/workHours", { team: results });
+      var labels = _.map("12:00am, 3:00am, 6:00am, 9:00am, 12:00pm, 3:00pm, 6:00pm, 9:00pm".split(", "), function (time) {
+        return {
+          text: time,
+          offset: percentOfDay(moment(time, format).diff(today))
+        };
+      });
+
+      labels.push({
+        text: "12:00am",
+        offset: percentOfDay(86400000)
+      });
+
+      res.render("reports/workHours", {
+        team: results,
+        labels: labels
+      });
     });
   });
+};
+
+var percentOfDay = function (milliseconds) {
+  return milliseconds / 86400000 * 100;
 };

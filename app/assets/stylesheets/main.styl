@@ -1,6 +1,38 @@
-table
-  th
-    text-align: left
+body
+  font-family: Helvetica
+  margin: 0
+  padding: 0
 
-  .time
-    text-align: right
+.time-chart
+  border-collapse: collapse
+  width: 100%
+  tr
+    border-bottom: 1px #eee solid
+    &:last-child
+      border-bottom: 0 none
+  .name
+    width: 1px
+    white-space: nowrap
+    padding: 5px 20px
+  .chart
+    position: relative
+    width: 100%
+    .entry
+      background-color: rgba(#000, 0.7)
+      bottom: 0
+      font-size: 0
+      position: absolute
+      top: 0
+  td .gridline
+      background-color: #ddd
+      bottom: 0
+      position: absolute
+      top: 0
+      width: 1px
+  th .gridline
+    width: 1px
+    position: absolute
+    bottom: 0
+    span
+      position: absolute
+      left: -50%
