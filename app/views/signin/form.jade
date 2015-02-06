@@ -1,0 +1,10 @@
+extends ../shared/layout
+
+block body
+  form(method="GET")
+    input(type="hidden", name="redirect_uri", value=redirectUri)
+    label
+      input(type="text", name="subdomain")
+      | .harvestapp.com
+
+    button(type="submit") Sign in with Harvest

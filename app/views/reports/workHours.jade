@@ -1,0 +1,8 @@
+extends ../shared/layout
+
+block body
+  h1 Team Work Schedule
+
+  svg.time-chart.js-time-chart
+
+  script.js-time-chart-data(type="application/json")!= JSON.stringify(team)
